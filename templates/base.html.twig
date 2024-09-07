@@ -1,0 +1,164 @@
+<!-- ============================================================================= 
+    📁 base.html.twig ▶ 
+
+    - 
+    💻 BREGLER Thomas © 2024 
+=================================================================================== -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- 🔖 FAVICON 🔖 -->
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        
+        <!-- 🔖 LINK 🔖 -->
+
+        {# Iconnoir #}
+        <link rel="stylesheet"href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css"/>
+
+        {# Google Fonts #}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        
+        {# Font Awesome #}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+        {# Bootstrap #}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+        <!-- 🔖 CSS 🔖 -->
+        <link rel="stylesheet" href="{{ asset('assets/css/admin/admin.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/sidebar.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/slick-theme.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/js/slick-1.8.1/slick/slick.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('assets/css/scroll-bar.css') }}">
+
+        <!-- 🔖 TITLE 🔖 -->
+        <title>{% block title %}BREGLER Thomas © 2024{% endblock %}</title>
+    </head>
+    <body>
+
+<!-- ***********************************************************************************
+                                🔧 NAVBAR 🔧                     
+**************************************************************************************** --> 
+
+ <main class="container">
+      <div class="menu">
+        <div class="avatar">
+          <img class="thumb" src="{{ asset('assets/img/navbar/userpicture.png') }}" width="60"/>
+          <span class="name">
+                <b>{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %} {{ app.user.getEmail() }} {% endif %}</b>
+            <br>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <p class="text-center">Mode Admin</p>
+                {% elseif is_granted('ROLE_DIRECTEURRH') %}
+                    <p class="text-center">Mode Directeur RH</p>
+                {% elseif is_granted('ROLE_RESPONSABLE_HIERA') %}
+                    <p class="text-center">Mode Responsable Hierarchique</p>
+                {% elseif is_granted('ROLE_REFERENT_FRAIS') %}
+                    <p class="text-center">Mode Référent frais</p>
+                {% elseif is_granted('ROLE_RTT') %}
+                    <p class="text-center">Mode RTT</p>
+                {% elseif is_granted('ROLE_CONNECT') %}
+                    <p class="text-center">Mode User</p>
+                {% else %}
+                    <p>No log</p>
+                {% endif %}
+          </span>
+        </div>
+        <nav class="primary">
+            <a href="{{ path('app_home') }}" class="menu-item active">
+                <span class="iconoir-report-columns"></span>
+                <span class="desc">Dashboard</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="iconoir-google-docs"></span>
+                <span class="desc">Absences</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="iconoir-skateboarding"></span>
+                <span class="desc">Déplacements</span>
+            </a>
+            <a href="{{ path('app_equipe_index') }}" class="menu-item">
+                <span class="iconoir-table"></span>
+                <span class="desc">Équipes</span>
+            </a>
+            <a href="{{ path('app_user_index') }}" class="menu-item">
+                <span class="iconoir-user"></span>
+                <span class="desc">Utilisateurs</span>
+            </a>
+
+            <a href="" class="menu-item">
+                <span class="iconoir-mail"></span>
+                <span class="desc">Contact</span>
+            </a>
+            
+            <a href="#" class="menu-item">
+                <span class="iconoir-settings"></span>
+                <span class="desc">Paramètres</span>
+            </a>
+            <a href="{{ path('app_logout') }}" class="menu-item">
+                <span class="iconoir-log-out"></span>
+                <span class="desc"><b>Déconnexion</b></span>
+            </a>
+        </nav>
+        <span class="expander iconoir-arrow-right"></span>
+      </div>
+
+        {% block body %}{% endblock %}
+    </div>
+     
+    </main>
+    <div class="video">
+      <video
+        src="https://user-images.githubusercontent.com/30212452/203724691-9e93bf50-df02-4034-9743-dfe32d18bf58.mp4"
+        muted
+        playsinline
+        autoplay
+        loop
+      ></video>
+    </div>
+
+
+
+
+<!-- ***********************************************************************************
+                                🔧 FOOTER 🔧                     
+**************************************************************************************** --> 
+
+    {% block footer %}{% endblock %}
+
+<!-- ***********************************************************************************
+                                🔧 SCRIPTS 🔧                     
+**************************************************************************************** --> 
+
+        <!-- Scripts -->
+        <script src="{{ asset('assets/js/sidebar.js') }}"></script>
+
+
+        <!-- ***************************************************************** --> 
+
+        <!-- Jquery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <!-- Bootstrap -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/d2408fdc07.js" crossorigin="anonymous"></script>
+        <!-- Ckediotr -->
+        <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+        <!-- Gsap -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+        <!-- Slick -->
+        <script type="text/javascript" src="{{ asset('assets/js/slick-1.8.1/slick/slick.min.js') }}"></script>
+        <!-- AOS -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script><script>AOS.init();</script>
+        
+    </body>
+</html>
